@@ -24,6 +24,7 @@ window.onload = function() {
     function create() {
         // Create a sprite at the center of the screen using the 'dog' image.
         playersprite = new Sprite(game, 0, 0, 'dog', 9);//game.add.sprite( game.world.centerX, game.world.centerY, 'dog',  9);
+		game.add.sprite(playersprite, game.world.centerX, game.world.centerY);
         // Anchor the sprite at its center, as opposed to its top-left corner.
         // so it will be truly centered.
         playersprite.anchor.setTo( 0.5, 0.5 );
