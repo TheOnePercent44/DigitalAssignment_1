@@ -16,14 +16,14 @@ window.onload = function() {
     var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update } );
     
     function preload() {
-        game.load.spritesheet( 'dog', 'assets/DogSheet.png' );
+        game.load.image( 'dog', 'assets/DogSheet.png', 0 );
     }
     
     var playersprite;
     
     function create() {
         // Create a sprite at the center of the screen using the 'dog' image.
-        playersprite = game.add.sprite( game.world.centerX, game.world.centerY, 'dog',  9);
+        playersprite = game.add.tileSprite( game.world.centerX, game.world.centerY, 1024, 1024, 'dog',  0);
         // Anchor the sprite at its center, as opposed to its top-left corner.
         // so it will be truly centered.
         playersprite.anchor.setTo( 0.5, 0.5 );
@@ -36,8 +36,8 @@ window.onload = function() {
         // Add some text using a CSS style.
         // Center it in X, and position its top 15 pixels from the top of the world.
         var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
-        var text = game.add.text( game.world.centerX, 15, "Build something awesome.", style );
-        text.anchor.setTo( 0.5, 0.0 );
+        //var text = game.add.text( game.world.centerX, 15, "Build something awesome.", style );
+        //text.anchor.setTo( 0.5, 0.0 );
     }
     
     function update() {
@@ -46,6 +46,6 @@ window.onload = function() {
         // in X or Y.
         // This function returns the rotation angle that makes it visually match its
         // new trajectory.
-        playersprite.rotation = game.physics.arcade.accelerateToPointer( playersprite, this.game.input.activePointer, 500, 500, 500 );
+        //playersprite.rotation = game.physics.arcade.accelerateToPointer( playersprite, this.game.input.activePointer, 500, 500, 500 );
     }
 };
