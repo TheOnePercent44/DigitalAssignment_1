@@ -26,7 +26,7 @@ window.onload = function() {
         playersprite = game.add.sprite(game.world.centerX, game.world.centerY, 'dog');
         // Anchor the sprite at its center, as opposed to its top-left corner.
         // so it will be truly centered.
-        playersprite.anchor.setTo( 0.5, 0.5 );
+        //playersprite.anchor.setTo( 0.5, 0.5 );
         
         // Turn on the arcade physics engine for this sprite.
         game.physics.enable( playersprite, Phaser.Physics.ARCADE );
