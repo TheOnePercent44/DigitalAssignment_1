@@ -17,7 +17,7 @@ window.onload = function() {
     
     function preload() {
         //game.load.atlasJSONHash( 'dog', 'assets/dog.png', 'assets/dog.json');
-		game.load.spritesheet('dog', 'assets/dog.png', 47, 31);
+		game.load.spritesheet('dog', 'assets/dog.png', 47, 31, 4);
     }
     
     var playersprite;
