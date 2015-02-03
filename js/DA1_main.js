@@ -16,7 +16,8 @@ window.onload = function() {
     var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update } );
     
     function preload() {
-        game.load.atlasJSONHash( 'dog', 'assets/dog.png', 188, 31);
+        game.load.atlasJSONHash( 'dog', 'assets/dog.png', 'assets/dog.json');
+		//game.load.texture('dogtext', 'assets/dog.png'
     }
     
     var playersprite;
