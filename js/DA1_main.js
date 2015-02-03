@@ -16,7 +16,7 @@ window.onload = function() {
     var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update } );
     
     function preload() {
-        game.load.spritesheet( 'dog', 'assets/DogSheet.png', 64, 64 );
+        game.load.spritesheet( 'dog', 'assets/dog_brown.png', 138, 54 );
     }
     
     var playersprite;
