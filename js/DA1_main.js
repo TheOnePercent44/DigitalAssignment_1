@@ -16,7 +16,7 @@ window.onload = function() {
     var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update } );
     
     function preload() {
-        game.load.spritesheet( 'dog', 'assets/dog_brown.png', 138, 54);
+        game.load.atlasJSONHash( 'dog', 'assets/dog.png', 188, 31);
     }
     
     var playersprite;
@@ -24,7 +24,8 @@ window.onload = function() {
     function create() {
         // Create a sprite at the center of the screen using the 'dog' image.
         playersprite = game.add.sprite(game.world.centerX, game.world.centerY, 'dog');
-		player.frame = 0;
+		//playersprite.animations.add('walk', 'dog
+		//player.frame = 0;
         // Anchor the sprite at its center, as opposed to its top-left corner.
         // so it will be truly centered.
         //playersprite.anchor.setTo( 0.5, 0.5 );
