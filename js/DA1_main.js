@@ -25,13 +25,13 @@ window.onload = function() {
     var playersprite, group, scrollPosition, background, playerSpeed, map, layer;
     
     function create() {
-		map = game.add.tilemap('map', 32, 32);
+		/*map = game.add.tilemap('map', 32, 32);
 		//  Now add in the tileset
 		map.addTilesetImage('tiles');
 		//  Create our layer
 		layer = map.createLayer(0);
 		//  Resize the world
-		layer.resizeWorld();
+		layer.resizeWorld();*/
         // Create a sprite at the center of the screen using the 'dog' image.
         playersprite = game.add.sprite(47, game.world.centerY, 'dog');
 		playersprite.anchor.setTo(0.5, 1);
