@@ -29,7 +29,7 @@ window.onload = function() {
 		//  Now add in the tileset
 		map.addTilesetImage('tiles');
         // Create a sprite at the center of the screen using the 'dog' image.
-        playersprite = game.add.sprite(0, game.world.centerY, 'dog');
+        playersprite = game.add.sprite(4, game.world.centerY, 'dog');
 		playersprite.anchor.setTo(0.5, 1);
 		player.scale.x = -1;
 		//playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
