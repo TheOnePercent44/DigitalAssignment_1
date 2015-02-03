@@ -19,7 +19,7 @@ window.onload = function() {
         //game.load.atlasJSONHash( 'dog', 'assets/dog.png', 'assets/dog.json');
 		game.load.spritesheet('dog', 'assets/dog.png', 47, 31, 4);
 		game.load.tilemap('map', 'assets/grasstile1.json', null, Phaser.Tilemap.TILED_JSON);
-		game.load.image('tiles', 'assets/grasstile1.png');
+		game.load.image('tiles', 'assets/grassblock.png');
     }
     
     var playersprite, group, scrollPosition, background, playerSpeed, map, layer;
@@ -28,7 +28,7 @@ window.onload = function() {
 		map = game.add.tilemap('map', 32, 32);
 		map.addTilesetImage('More Grass?', 'tiles');
 		layer = map.createLayer('Layer0');
-		//layer.resizeWorld();
+		layer.resizeWorld();
         // Create a sprite at the center of the screen using the 'dog' image.
         playersprite = game.add.sprite(47, game.world.centerY, 'dog');
 		playersprite.anchor.setTo(0.5, 1);
