@@ -25,7 +25,7 @@ window.onload = function() {
     function create() {
         // Create a sprite at the center of the screen using the 'dog' image.
         playersprite = game.add.sprite(game.world.centerX, game.world.centerY, 'dog');
-		player.frame = 2;
+		//player.frame = 2;
 		//playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
 		player.animations.add('run', [1, 3, 0], 10, true);
 		//player.animations.add('right', [5, 6, 7, 8], 10, true);
