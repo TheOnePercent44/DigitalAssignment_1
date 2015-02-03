@@ -16,16 +16,16 @@ window.onload = function() {
     var game = new Phaser.Game( 800, 600, Phaser.AUTO, 'game', { preload: preload, create: create, update: update } );
     
     function preload() {
-        game.load.atlasJSONHash( 'dog', 'assets/dog.png', 'assets/dog.json');
-		//game.load.texture('dogtext', 'assets/dog.png'
+        //game.load.atlasJSONHash( 'dog', 'assets/dog.png', 'assets/dog.json');
+		game.load.spritesheet('dog', 'assets/dog.png', 47, 31);
     }
     
     var playersprite;
     
     function create() {
         // Create a sprite at the center of the screen using the 'dog' image.
-        playersprite = game.add.sprite(game.world.centerX, game.world.centerY, 'dog/run/0003');
-		playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
+        playersprite = game.add.sprite(game.world.centerX, game.world.centerY, 'dog');
+		//playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
 		//player.frame = 0;
         // Anchor the sprite at its center, as opposed to its top-left corner.
         // so it will be truly centered.
@@ -35,12 +35,6 @@ window.onload = function() {
         game.physics.enable( playersprite, Phaser.Physics.ARCADE );
         // Make it bounce off of the world bounds.
         playersprite.body.collideWorldBounds = true;
-        
-        // Add some text using a CSS style.
-        // Center it in X, and position its top 15 pixels from the top of the world.
-        //var style = { font: "25px Verdana", fill: "#9999ff", align: "center" };
-        //var text = game.add.text( game.world.centerX, 15, "Build something awesome.", style );
-        //text.anchor.setTo( 0.5, 0.0 );
     }
     
     function update() {
