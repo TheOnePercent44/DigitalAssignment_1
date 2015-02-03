@@ -18,21 +18,27 @@ window.onload = function() {
     function preload() {
         //game.load.atlasJSONHash( 'dog', 'assets/dog.png', 'assets/dog.json');
 		game.load.spritesheet('dog', 'assets/dog.png', 47, 31, 4);
+		game.load.tilemap('map', 'assets/grasstile1.csv', null, Phaser.Tilemap.CSV);
+		game.load.image('tiles', 'assets/grasstile1.png');
     }
     
-    var playersprite, group, scrollPosition, background, playerSpeed;
+    var playersprite, group, scrollPosition, background, playerSpeed, map;
     
     function create() {
+		map = game.add.tilemap('map', 32, 32);
+		//  Now add in the tileset
+		map.addTilesetImage('tiles');
         // Create a sprite at the center of the screen using the 'dog' image.
         playersprite = game.add.sprite(0, game.world.centerY, 'dog');
-		player.scale = -1;
+		playersprite.anchor.setTo(0.5, 1);
+		player.scale.x = -1;
 		//playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
 		player.animations.add('run', [1, 3, 0], 10, true);
 		//player.animations.add('right', [5, 6, 7, 8], 10, true);
 		
         // Anchor the sprite at its center, as opposed to its top-left corner.
         // so it will be truly centered.
-        playersprite.anchor.setTo( 0.5, 0.5 );
+        //playersprite.anchor.setTo( 0.5, 0.5 );
         
         // Turn on the arcade physics engine for this sprite.
         game.physics.enable(playersprite, Phaser.Physics.ARCADE );
