@@ -20,22 +20,22 @@ window.onload = function() {
 		game.load.spritesheet('dog', 'assets/dog.png', 47, 31, 4);
     }
     
-    var playersprite;
+    var playersprite, group, scrollPosition, background, playerSpeed;
     
     function create() {
         // Create a sprite at the center of the screen using the 'dog' image.
-        playersprite = game.add.sprite(game.world.centerX, game.world.centerY, 'dog');
-		//player.frame = 2;
+        playersprite = game.add.sprite(0, game.world.centerY, 'dog');
+		player.scale = -1;
 		//playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
 		player.animations.add('run', [1, 3, 0], 10, true);
 		//player.animations.add('right', [5, 6, 7, 8], 10, true);
 		
         // Anchor the sprite at its center, as opposed to its top-left corner.
         // so it will be truly centered.
-        //playersprite.anchor.setTo( 0.5, 0.5 );
+        playersprite.anchor.setTo( 0.5, 0.5 );
         
         // Turn on the arcade physics engine for this sprite.
-        game.physics.enable( playersprite, Phaser.Physics.ARCADE );
+        game.physics.enable(playersprite, Phaser.Physics.ARCADE );
         // Make it bounce off of the world bounds.
         playersprite.body.collideWorldBounds = true;
     }
@@ -47,5 +47,23 @@ window.onload = function() {
         // This function returns the rotation angle that makes it visually match its
         // new trajectory.
         //playersprite.rotation = game.physics.arcade.accelerateToPointer( playersprite, this.game.input.activePointer, 500, 500, 500 );
+		var self = this;
+        
+        ground.tilePosition.x = scrollPosition;
+        
+        background.tilePosition.x = -(scrollPosition * 0.005);
+        
+        game.physics.arcade.collide(group, ground);
+                
+        if (this.cursors.left.isDown) {
+            scrollPosition -= playerSpeed; 
+        }
+        else if (this.cursors.right.isDown) {
+            scrollPosition += playerSpeed;
+        }
+        
+        if (this.cursors.up.isDown) {
+             player.body.velocity.y = -300;   
+        }
     }
 };
