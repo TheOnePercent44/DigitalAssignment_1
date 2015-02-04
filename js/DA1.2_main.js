@@ -8,19 +8,24 @@ var GameState = function(game) {
 
 // Load images and sounds
 GameState.prototype.preload = function() {
-    this.game.load.image('player', '/assets/gfx/player.png');
+    game.load.spritesheet('dog', 'assets/dog.png', 47, 31, 4);
+	game.load.tilemap('map', 'assets/grasstile3.json', null, Phaser.Tilemap.TILED_JSON);
+	game.load.image('tiles', 'assets/grassblock2_128x96_poor.png');
 };
-
+var group, scrollPosition, background, playerSpeed, map, layer;
 // Setup the example
 GameState.prototype.create = function() {
     // Set stage background color
-    this.game.stage.backgroundColor = 0x4488cc;
-
+    //this.game.stage.backgroundColor = 0x4488cc;
+	map = game.add.tilemap('map');//, 32, 32);
+	map.addTilesetImage('GrassBlocks', 'tiles', 32, 32);
+	layer = map.createLayer('Layer0');
     // Create a follower
     this.game.add.existing(
-        new Follower(this.game, this.game.width/2, this.game.height/2, this.game.input)
+        new Follower(this.game, 47, this.game.height/2, this.game.input)
     );
-
+	
+	console.log("Player made");
     // Simulate a pointer click/tap input at the center of the stage
     // when the example begins running.
     this.game.input.x = this.game.width/2;
@@ -33,8 +38,10 @@ GameState.prototype.update = function() {
 
 // Follower constructor
 var Follower = function(game, x, y, target) {
-    Phaser.Sprite.call(this, game, x, y, 'player');
-
+    Phaser.Sprite.call(this, game, x, y, 'dog');
+	this.anchor.setTo(0.5, 0.5);
+	this.scale.x = -2;
+	this.scale.y = 2;
     // Save the target that this Follower will follow
     // The target is any object with x and y properties
     this.target = target;
@@ -44,6 +51,8 @@ var Follower = function(game, x, y, target) {
 
     // Enable physics on this object
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
+	
+    this.body.collideWorldBounds = true;
 
     // Define constants that affect motion
     this.MAX_SPEED = 250; // pixels/second
@@ -59,16 +68,16 @@ Follower.prototype.update = function() {
     var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
 
     // If the distance > MIN_DISTANCE then move
-    if (distance > this.MIN_DISTANCE) {
+    //if (distance > this.MIN_DISTANCE) {
         // Calculate the angle to the target
         var rotation = this.game.math.angleBetween(this.x, this.y, this.target.x, this.target.y);
 
         // Calculate velocity vector based on rotation and this.MAX_SPEED
-        this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
+        //this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
         this.body.velocity.y = Math.sin(rotation) * this.MAX_SPEED;
-    } else {
-        this.body.velocity.setTo(0, 0);
-    }
+    //} else {
+    //    this.body.velocity.setTo(0, 0);
+    //}
 };
 
 var game = new Phaser.Game(848, 450, Phaser.AUTO, 'game');
