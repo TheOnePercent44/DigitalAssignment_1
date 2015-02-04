@@ -9,17 +9,22 @@ var GameState = function(game) {
 // Load images and sounds
 GameState.prototype.preload = function() {
     game.load.spritesheet('dog', 'assets/dog.png', 47, 31, 4);
-	game.load.tilemap('map', 'assets/grasstile3.json', null, Phaser.Tilemap.TILED_JSON);
-	game.load.image('tiles', 'assets/grassblock2_128x96_poor.png');
+	game.load.tilemap('map', 'assets/grasstile4.json', null, Phaser.Tilemap.TILED_JSON);
+	game.load.image('grasstiles', 'assets/grassblock2_128x96_poor.png');
+	game.load.image('logtiles', 'assets/log_w_grass_64x64.png');
+	game.load.image('beartiles', 'assets/beartrap_grass_64x64.png');
 };
-var group, scrollPosition, background, playerSpeed, map, layer;
+var group, scrollPosition, background, playerSpeed, map, layer0, layer1;
 // Setup the example
 GameState.prototype.create = function() {
     // Set stage background color
     //this.game.stage.backgroundColor = 0x4488cc;
 	map = game.add.tilemap('map');//, 32, 32);
-	map.addTilesetImage('GrassBlocks', 'tiles', 32, 32);
-	layer = map.createLayer('Layer0');
+	map.addTilesetImage('GrassBlocks', 'grasstiles', 32, 32);
+	map.addTilesetImage('LogBlock', 'logtiles', 64, 64);
+	map.addTilesetImage('BearBlock', 'beartiles', 64, 64);
+	layer0 = map.createLayer('Layer0');
+	layer1 = map.createLayer('Layer1');
     // Create a follower
     this.game.add.existing(
         new Follower(this.game, 47, this.game.height/2, this.game.input)
@@ -65,6 +70,7 @@ Follower.prototype.constructor = Follower;
 
 Follower.prototype.update = function() {
     // Calculate distance to target
+	console.log("Updating");
     var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
 
     // If the distance > MIN_DISTANCE then move
@@ -74,7 +80,7 @@ Follower.prototype.update = function() {
 
         // Calculate velocity vector based on rotation and this.MAX_SPEED
         //this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
-        this.body.velocity.y = (Math.sin(rotation)+ Math.cos(rotation)) * this.MAX_SPEED;
+        this.body.velocity.y = Math.sin(rotation) * this.MAX_SPEED;
     //} else {
     //    this.body.velocity.setTo(0, 0);
     //}
