@@ -19,7 +19,7 @@ window.onload = function() {
         //game.load.atlasJSONHash( 'dog', 'assets/dog.png', 'assets/dog.json');
 		game.load.spritesheet('dog', 'assets/dog.png', 47, 31, 4);
 		game.load.tilemap('map', 'assets/grasstile1.json', null, Phaser.Tilemap.TILED_JSON);
-		game.load.image('tiles', 'assets/grassblock.png');
+		game.load.image('tiles', 'assets/grasstile1.png');
     }
     
     var playersprite, group, scrollPosition, background, playerSpeed, map, layer;
