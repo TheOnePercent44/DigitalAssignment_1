@@ -35,7 +35,8 @@ window.onload = function() {
 		playersprite.anchor.setTo(0.5, 1);
 		playersprite.scale.x = -2;
 		playersprite.scale.y = 2;*/
-		this.game.add.existing(new Follower(this.game, 47, this.game.height/2, this.game.input));
+		playersprite = new Follower(this.game, 47, this.game.height/2, this.game.input);
+		this.game.add.existing(playersprite);
 		//playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
 		//player.animations.add('run', [1, 3, 0], 10, true);
 		//player.animations.add('right', [5, 6, 7, 8], 10, true);
@@ -75,7 +76,7 @@ window.onload = function() {
 	Follower.prototype = Object.create(Phaser.Sprite.prototype);
 	Follower.prototype.constructor = Follower;
 
-	Follower.prototype.update = function() {
+	/*Follower.prototype.update = function() {
 		// Calculate distance to target
 		var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
 
@@ -90,18 +91,18 @@ window.onload = function() {
 		} else {
 			this.body.velocity.setTo(0, 0);
 		}
-	};
+	};*/
     
-    /*function update() {
+    function update() {
         //playersprite.rotation = game.physics.arcade.accelerateToPointer( playersprite, this.game.input.activePointer, 500, 500, 500 );
 		var self = this;
         
         map.tilePosition.x = scrollPosition;
         scrollPosition += playerSpeed;
-        
+        playersprite.body.velocity.y = Math.sin(rotation) * this.MAX_SPEED;
 		
                 
         
-    }*/
+    }
 	
 };
