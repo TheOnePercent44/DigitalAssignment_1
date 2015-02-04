@@ -60,7 +60,7 @@ window.onload = function() {
 		this.target = target;
 
 		// Set the pivot point for this sprite to the center
-		this.anchor.setTo(0.5, 0.5);
+		this.anchor.setTo(0.5, 1);
 		this.scale.x = -2;
 		this.scale.y = 2;
 		// Enable physics on this object
