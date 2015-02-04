@@ -17,7 +17,7 @@
     {
 
     },
- "renderorder":"right-up",
+ "renderorder":"right-down",
  "tileheight":32,
  "tilesets":[
         {
