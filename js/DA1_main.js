@@ -104,7 +104,7 @@ window.onload = function() {
         //playersprite.rotation = game.physics.arcade.accelerateToPointer( playersprite, this.game.input.activePointer, 500, 500, 500 );
 		var self = this;
         
-        map.tilePosition.x = scrollPosition;
+        //map.tilePosition.x = scrollPosition;
         scrollPosition += playerSpeed;
 		
 		var distance = playersprite.game.math.distance(playersprite.x, playersprite.y, game.input.x, game.input.y);
