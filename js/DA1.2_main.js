@@ -25,7 +25,7 @@ GameState.prototype.create = function() {
 	map.addTilesetImage('BearBlock', 'beartiles', 64, 64);
 	layer0 = map.createLayer('Layer0');
 	layer1 = map.createLayer('Layer1');
-	layer.resizeWorld();
+	layer0.resizeWorld();
     // Create a follower
     this.game.add.existing(
         new Follower(this.game, 47, this.game.height/2, this.game.input)
