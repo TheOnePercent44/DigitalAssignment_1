@@ -50,9 +50,9 @@ window.onload = function() {
         //playersprite.anchor.setTo( 0.5, 0.5 );
         
         // Turn on the arcade physics engine for this sprite.
-        //game.physics.enable(playersprite, Phaser.Physics.ARCADE );
+        game.physics.enable(playersprite, Phaser.Physics.ARCADE );
         // Make it bounce off of the world bounds.
-        //playersprite.body.collideWorldBounds = true;
+        playersprite.body.collideWorldBounds = true;
     }
 	
 	/*var Follower = function(game, x, y, target) {
