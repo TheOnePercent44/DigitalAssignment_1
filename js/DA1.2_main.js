@@ -25,7 +25,7 @@ GameState.prototype.create = function() {
 	map.addTilesetImage('BearBlock', 'beartiles', 64, 64);
 	layer0 = map.createLayer('Layer0');
 	layer1 = map.createLayer('Layer1');
-	layer0.resizeWorld();
+	layer1.resizeWorld();
     // Create a follower
     this.game.add.existing(
         new Follower(this.game, 47, this.game.height/2, this.game.input)
@@ -60,6 +60,7 @@ var Follower = function(game, x, y, target) {
 	
     this.body.collideWorldBounds = true;
 	game.camera.follow(this);
+	game.camera.deadzone = new Phaser.Rectangle(50, 0, 950, 544);//might lock player position on screen?
     // Define constants that affect motion
     this.MAX_SPEED = 250; // pixels/second
     this.MIN_DISTANCE = 32; // pixels
@@ -83,6 +84,8 @@ Follower.prototype.update = function() {
         //this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
         this.body.velocity.y = Math.sin(rotation) * this.MAX_SPEED;
 		this.body.velocity.x = 300;//constant running speed? debug value for now
+		
+		game.camera.deadzone.setTo(game.camera.deadzone.left+playerSpeed, 0, 950, 544);//maybe keep the camera locked?
     //} else {
     //    this.body.velocity.setTo(0, 0);
     //}
