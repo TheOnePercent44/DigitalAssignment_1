@@ -38,7 +38,7 @@ GameState.prototype.create = function() {
         new Follower(this.game, 47, this.game.height/2, this.game.input)
     );
 	
-	console.log("Player made");
+	//console.log("Player made");
     // Simulate a pointer click/tap input at the center of the stage
     // when the example begins running.
     this.game.input.x = this.game.width/2;
@@ -77,11 +77,11 @@ var Follower = function(game, x, y, target) {
 Follower.prototype = Object.create(Phaser.Sprite.prototype);
 Follower.prototype.constructor = Follower;
 
-var passedobjects;
+var passedobjects, ypos, xpos, rotation, self;
 Follower.prototype.update = function() {
     // Calculate distance to target
 	//console.log("Updating");
-	var self = this;
+	self = this;
     //var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
 	passedobjects = obstacles.filter(function(child, index, children){return child.x < self.x ? true : false;});
 	passedobjects.callAll('destroy', false);
@@ -89,13 +89,13 @@ Follower.prototype.update = function() {
     // If the distance > MIN_DISTANCE then move
     //if (distance > this.MIN_DISTANCE) {
     // Calculate the angle to the target
-	var rotation = this.game.math.angleBetween(this.x, this.y, this.target.x, this.target.y);
-	
+	rotation = self.game.math.angleBetween(self.x, self.y, self.target.x, self.target.y);
+	ypos = game.RandomDataGenerator.integerInRange(64, 544);
 	// Calculate velocity vector based on rotation and this.MAX_SPEED
 	//this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
-	this.body.velocity.y = Math.sin(rotation) * this.MAX_SPEED;
+	self.body.velocity.y = Math.sin(rotation) * self.MAX_SPEED;
 	//this.body.velocity.x = 300;//constant running speed? debug value for now
-	scrollPosition += playerSpeed;//adjust playerspeed (or this value for speed running)
+	scrollPosition += self.MAX_SPEED;//adjust playerspeed (or this value for speed running)
 	
 	//game.camera.deadzone.setTo(game.camera.deadzone.left+playerSpeed, 0, 950, 544);//maybe keep the camera locked?
     //} else {
