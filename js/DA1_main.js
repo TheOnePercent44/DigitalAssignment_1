@@ -100,9 +100,9 @@ window.onload = function() {
         map.tilePosition.x = scrollPosition;
         scrollPosition += playerSpeed;
 		
-		var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
-		var rotation = this.game.math.angleBetween(this.x, this.y, this.target.x, this.target.y);
-        playersprite.body.velocity.y = Math.sin(rotation) * this.MAX_SPEED;
+		var distance = playersprite.game.math.distance(playersprite.x, playersprite.y, playersprite.target.x, playersprite.target.y);
+		var rotation = playersprite.game.math.angleBetween(playersprite.x, playersprite.y, playersprite.target.x, playersprite.target.y);
+        playersprite.body.velocity.y = Math.sin(rotation) * playersprite.MAX_SPEED;
 		
                 
         
