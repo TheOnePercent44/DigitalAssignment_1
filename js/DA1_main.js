@@ -28,6 +28,7 @@ window.onload = function() {
 		map = game.add.tilemap('map');//, 32, 32);
 		map.addTilesetImage('More Grass?', 'tiles', 32, 32);
 		layer = map.createLayer('Tile Layer 1');
+		playerSpeed = 250;
 		//layer.resizeWorld();
         // Create a sprite at the center of the screen using the 'dog' image.
         /*playersprite = game.add.sprite(47, game.world.centerY, 'dog');
@@ -35,7 +36,7 @@ window.onload = function() {
 		playersprite.scale.x = -2;
 		playersprite.scale.y = 2;*/
 		this.game.add.existing(
-			new Follower(this.game, this.game.width/2, this.game.height/2, this.game.input)
+			new Follower(this.game, 0, this.game.height/2, this.game.input)
 		);
 		//playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
 		//player.animations.add('run', [1, 3, 0], 10, true);
@@ -92,11 +93,6 @@ window.onload = function() {
 	};
     
     function update() {
-        // Accelerate the 'logo' sprite towards the cursor,
-        // accelerating at 500 pixels/second and moving no faster than 500 pixels/second
-        // in X or Y.
-        // This function returns the rotation angle that makes it visually match its
-        // new trajectory.
         //playersprite.rotation = game.physics.arcade.accelerateToPointer( playersprite, this.game.input.activePointer, 500, 500, 500 );
 		var self = this;
         
