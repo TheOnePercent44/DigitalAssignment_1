@@ -58,7 +58,7 @@ var Follower = function(game, x, y, target) {
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
 	
     this.body.collideWorldBounds = true;
-
+	game.camera.follow(this);
     // Define constants that affect motion
     this.MAX_SPEED = 250; // pixels/second
     this.MIN_DISTANCE = 32; // pixels
@@ -81,10 +81,11 @@ Follower.prototype.update = function() {
         // Calculate velocity vector based on rotation and this.MAX_SPEED
         //this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
         this.body.velocity.y = Math.sin(rotation) * this.MAX_SPEED;
+		this.body.velocity.x = 300;//constant running speed? debug value for now
     //} else {
     //    this.body.velocity.setTo(0, 0);
     //}
 };
 
-var game = new Phaser.Game(800, 800, Phaser.AUTO, 'game');
+var game = new Phaser.Game(1000, 544, Phaser.AUTO, 'game');
 game.state.add('game', GameState, true);
