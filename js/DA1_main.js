@@ -55,23 +55,14 @@ window.onload = function() {
         // This function returns the rotation angle that makes it visually match its
         // new trajectory.
         //playersprite.rotation = game.physics.arcade.accelerateToPointer( playersprite, this.game.input.activePointer, 500, 500, 500 );
-		var self = this;
+		/*var self = this;
         
         ground.tilePosition.x = scrollPosition;
         
         background.tilePosition.x = -(scrollPosition * 0.005);
         
-        game.physics.arcade.collide(group, ground);
+        game.physics.arcade.collide(group, ground);*/
                 
-        if (this.cursors.left.isDown) {
-            scrollPosition -= playerSpeed; 
-        }
-        else if (this.cursors.right.isDown) {
-            scrollPosition += playerSpeed;
-        }
         
-        if (this.cursors.up.isDown) {
-             player.body.velocity.y = -300;   
-        }
     }
 };
