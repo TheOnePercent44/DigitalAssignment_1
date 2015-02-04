@@ -80,5 +80,5 @@ Follower.prototype.update = function() {
     //}
 };
 
-var game = new Phaser.Game(848, 450, Phaser.AUTO, 'game');
+var game = new Phaser.Game(800, 800, Phaser.AUTO, 'game');
 game.state.add('game', GameState, true);
