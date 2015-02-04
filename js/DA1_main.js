@@ -37,6 +37,10 @@ window.onload = function() {
 		playersprite.scale.y = 2;*/
 		playersprite = new Follower(this.game, 47, this.game.height/2, this.game.input);
 		this.game.add.existing(playersprite);
+		console.log("Player made");
+		this.game.input.x = this.game.width/2;
+		this.game.input.y = this.game.height/2;
+		console.log("click simulated");
 		//playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
 		//player.animations.add('run', [1, 3, 0], 10, true);
 		//player.animations.add('right', [5, 6, 7, 8], 10, true);
@@ -70,11 +74,13 @@ window.onload = function() {
 		this.MIN_DISTANCE = 32; // pixels
 		
 		this.body.collideWorldBounds = true;
+		
+		console.log("Constructor ran(run?)");
 	};
 
 	// Followers are a type of Phaser.Sprite
-	Follower.prototype = Object.create(Phaser.Sprite.prototype);
-	Follower.prototype.constructor = Follower;
+	/*Follower.prototype = Object.create(Phaser.Sprite.prototype);
+	Follower.prototype.constructor = Follower;*/
 
 	/*Follower.prototype.update = function() {
 		// Calculate distance to target
@@ -94,6 +100,7 @@ window.onload = function() {
 	};*/
     
     function update() {
+		console.log("Updating");
         //playersprite.rotation = game.physics.arcade.accelerateToPointer( playersprite, this.game.input.activePointer, 500, 500, 500 );
 		var self = this;
         
