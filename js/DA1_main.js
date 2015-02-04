@@ -31,16 +31,16 @@ window.onload = function() {
 		playerSpeed = 250;
 		//layer.resizeWorld();
         // Create a sprite at the center of the screen using the 'dog' image.
-        /*playersprite = game.add.sprite(47, game.world.centerY, 'dog');
-		playersprite.anchor.setTo(0.5, 1);
+        playersprite = game.add.sprite(47, game.world.centerY, 'dog');
+		playersprite.anchor.setTo(0.5, 0.5);
 		playersprite.scale.x = -2;
-		playersprite.scale.y = 2;*/
-		playersprite = new Follower(this.game, 47, this.game.height/2, this.game.input);
-		this.game.add.existing(playersprite);
+		playersprite.scale.y = 2;
+		//playersprite = new Follower(this.game, 47, this.game.height/2, this.game.input);
+		//this.game.add.existing(playersprite);
 		console.log("Player made");
-		this.game.input.x = this.game.width/2;
-		this.game.input.y = this.game.height/2;
-		console.log("click simulated");
+		//this.game.input.x = this.game.width/2;
+		//this.game.input.y = this.game.height/2;
+		//console.log("click simulated");
 		//playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
 		//player.animations.add('run', [1, 3, 0], 10, true);
 		//player.animations.add('right', [5, 6, 7, 8], 10, true);
@@ -55,7 +55,7 @@ window.onload = function() {
         //playersprite.body.collideWorldBounds = true;
     }
 	
-	var Follower = function(game, x, y, target) {
+	/*var Follower = function(game, x, y, target) {
 		Phaser.Sprite.call(this, game, x, y, 'dog');
 
 		// Save the target that this Follower will follow
@@ -76,7 +76,7 @@ window.onload = function() {
 		this.body.collideWorldBounds = true;
 		
 		console.log("Constructor ran(run?)");
-	};
+	};*/
 
 	// Followers are a type of Phaser.Sprite
 	/*Follower.prototype = Object.create(Phaser.Sprite.prototype);
@@ -107,8 +107,8 @@ window.onload = function() {
         map.tilePosition.x = scrollPosition;
         scrollPosition += playerSpeed;
 		
-		var distance = playersprite.game.math.distance(playersprite.x, playersprite.y, playersprite.target.x, playersprite.target.y);
-		var rotation = playersprite.game.math.angleBetween(playersprite.x, playersprite.y, playersprite.target.x, playersprite.target.y);
+		var distance = playersprite.game.math.distance(playersprite.x, playersprite.y, game.input.x, game.input.y);
+		var rotation = playersprite.game.math.angleBetween(playersprite.x, playersprite.y, game.input.x, game.input.y);
         playersprite.body.velocity.y = Math.sin(rotation) * playersprite.MAX_SPEED;
 		
                 
