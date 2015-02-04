@@ -26,7 +26,7 @@ window.onload = function() {
     
     function create() {
 		map = game.add.tilemap('map');//, 32, 32);
-		map.addTilesetImage('tiles');//'More Grass?', 'tiles');
+		map.addTilesetImage('More Grass?', 'tiles', 32, 32);
 		layer = map.createLayer('Tile Layer 1');
 		//layer.resizeWorld();
         // Create a sprite at the center of the screen using the 'dog' image.
