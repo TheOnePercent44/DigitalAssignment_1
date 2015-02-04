@@ -36,7 +36,7 @@ window.onload = function() {
 		playersprite.scale.x = -2;
 		playersprite.scale.y = 2;*/
 		this.game.add.existing(
-			new Follower(this.game, 0, this.game.height/2, this.game.input)
+			new Follower(this.game, 47, this.game.height/2, this.game.input)
 		);
 		//playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
 		//player.animations.add('run', [1, 3, 0], 10, true);
@@ -47,9 +47,9 @@ window.onload = function() {
         //playersprite.anchor.setTo( 0.5, 0.5 );
         
         // Turn on the arcade physics engine for this sprite.
-        game.physics.enable(playersprite, Phaser.Physics.ARCADE );
+        //game.physics.enable(playersprite, Phaser.Physics.ARCADE );
         // Make it bounce off of the world bounds.
-        playersprite.body.collideWorldBounds = true;
+        //playersprite.body.collideWorldBounds = true;
     }
 	
 	var Follower = function(game, x, y, target) {
@@ -60,7 +60,7 @@ window.onload = function() {
 		this.target = target;
 
 		// Set the pivot point for this sprite to the center
-		this.anchor.setTo(0.5, 1);
+		this.anchor.setTo(0.5, 0.5);
 		this.scale.x = -2;
 		this.scale.y = 2;
 		// Enable physics on this object
@@ -69,6 +69,8 @@ window.onload = function() {
 		// Define constants that affect motion
 		this.MAX_SPEED = 250; // pixels/second
 		this.MIN_DISTANCE = 32; // pixels
+		
+		this.body.collideWorldBounds = true;
 	};
 
 	// Followers are a type of Phaser.Sprite
