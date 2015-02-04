@@ -30,10 +30,13 @@ window.onload = function() {
 		layer = map.createLayer('Tile Layer 1');
 		//layer.resizeWorld();
         // Create a sprite at the center of the screen using the 'dog' image.
-        playersprite = game.add.sprite(47, game.world.centerY, 'dog');
+        /*playersprite = game.add.sprite(47, game.world.centerY, 'dog');
 		playersprite.anchor.setTo(0.5, 1);
 		playersprite.scale.x = -2;
-		playersprite.scale.y = 2;
+		playersprite.scale.y = 2;*/
+		this.game.add.existing(
+			new Follower(this.game, this.game.width/2, this.game.height/2, this.game.input)
+		);
 		//playersprite.animations.add('walk', ['dog/run/0001'], 10, true, false);
 		//player.animations.add('run', [1, 3, 0], 10, true);
 		//player.animations.add('right', [5, 6, 7, 8], 10, true);
@@ -47,6 +50,46 @@ window.onload = function() {
         // Make it bounce off of the world bounds.
         playersprite.body.collideWorldBounds = true;
     }
+	
+	var Follower = function(game, x, y, target) {
+		Phaser.Sprite.call(this, game, x, y, 'dog');
+
+		// Save the target that this Follower will follow
+		// The target is any object with x and y properties
+		this.target = target;
+
+		// Set the pivot point for this sprite to the center
+		this.anchor.setTo(0.5, 0.5);
+		this.scale.x = -2;
+		this.scale.y = 2;
+		// Enable physics on this object
+		this.game.physics.enable(this, Phaser.Physics.ARCADE);
+
+		// Define constants that affect motion
+		this.MAX_SPEED = 250; // pixels/second
+		this.MIN_DISTANCE = 32; // pixels
+	};
+
+	// Followers are a type of Phaser.Sprite
+	Follower.prototype = Object.create(Phaser.Sprite.prototype);
+	Follower.prototype.constructor = Follower;
+
+	Follower.prototype.update = function() {
+		// Calculate distance to target
+		var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
+
+		// If the distance > MIN_DISTANCE then move
+		if (distance > this.MIN_DISTANCE) {
+			// Calculate the angle to the target
+			var rotation = this.game.math.angleBetween(this.x, this.y, this.target.x, this.target.y);
+
+			// Calculate velocity vector based on rotation and this.MAX_SPEED
+			//this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
+			this.body.velocity.y = Math.sin(rotation) * this.MAX_SPEED;
+		} else {
+			this.body.velocity.setTo(0, 0);
+		}
+	};
     
     function update() {
         // Accelerate the 'logo' sprite towards the cursor,
@@ -55,14 +98,14 @@ window.onload = function() {
         // This function returns the rotation angle that makes it visually match its
         // new trajectory.
         //playersprite.rotation = game.physics.arcade.accelerateToPointer( playersprite, this.game.input.activePointer, 500, 500, 500 );
-		/*var self = this;
+		var self = this;
         
-        ground.tilePosition.x = scrollPosition;
+        map.tilePosition.x = scrollPosition;
+        scrollPosition += playerSpeed;
         
-        background.tilePosition.x = -(scrollPosition * 0.005);
-        
-        game.physics.arcade.collide(group, ground);*/
+		
                 
         
     }
+	
 };
