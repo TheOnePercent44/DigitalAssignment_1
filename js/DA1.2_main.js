@@ -75,7 +75,9 @@ function jump()
 
 var passedobjects, ypos, xpos, rotation, self, count, itemtype, distance, obstagen, sinval;
 Follower.prototype.update = function() {
-    // Calculate distance to target
+	//console.log("Updating");
+	self = this;
+	
 	if(isJumping === true)
 	{
 		if(game.time.elapsedSince(jumpStart) > 2)
@@ -84,8 +86,9 @@ Follower.prototype.update = function() {
 			self.frame = 0;
 		}
 	}
-	console.log("Updating");
-	self = this;
+	
+	if(isJumping === false)
+		game.physics.arcade.overlap(self, obstacles, collisionHandler, null, this);
 	
 	passedobjects = obstacles.filter(function(child, index, children){return child.x < (self.x-500) ? true : false;});
 	passedobjects.callAll('destroy', false);
@@ -129,6 +132,16 @@ Follower.prototype.update = function() {
 	scrollPosition += self.SPEED;//adjust playerspeed (or this value for speed running)
 	obstacles.setAll('body.velocity.x', -self.SPEED, false, false, 0, true);//updating speed?
 };
+
+function collisionHandler(self, obstacle)
+{
+	endGame();
+}
+
+function endGame()
+{
+	console.log("The game is over. You lose.");
+}
 
 var game = new Phaser.Game(1000, 544, Phaser.AUTO, 'game');
 game.state.add('game', GameState, true);
