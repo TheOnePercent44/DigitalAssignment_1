@@ -87,12 +87,12 @@ Follower.prototype.update = function() {
 	console.log("Updating");
 	self = this;
     //var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
-	/*passedobjects = obstacles.filter(function(child, index, children){return child.x < (self.x-500) ? true : false;});
-	passedobjects.callAll('destroy', false);*/
-	obstacles.forEach(function(obstacle){
+	passedobjects = obstacles.filter(function(child, index, children){return child.x < (self.x-500) ? true : false;});
+	passedobjects.callAll('destroy', false);
+	/*obstacles.forEach(function(obstacle){
 		if(obstacle.x < self.x-500)
 			obstacle.destroy();
-		});
+		});*/
 	//if
 	count = obstacles.countLiving();
 	if(count < 30)
@@ -106,7 +106,7 @@ Follower.prototype.update = function() {
 			ypos = game.rnd.integerInRange(0, 480);
 			xpos = game.rnd.integerInRange(self.body.x+1050, self.body.x+2050);
 			itemtype = game.rnd.integerInRange(1, 2);
-			obstagen = game.add.sprite('log');
+			obstagen = game.add.sprite(game, xpos, ypos, 'log');
 			if(game.physics.arcade.overlap(obstagen, obstacles) === false)
 			{
 				console.log("Creating object");//debug
