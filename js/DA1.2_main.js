@@ -103,8 +103,8 @@ Follower.prototype.update = function() {
 	distance = self.target.x - self.body.x;
 	
 	sinval = Math.sin(rotation);
-	self.body.velocity.y = sinval*distance*5;
-	self.SPEED = self.SPEED *((distance/400)*0.5);
+	self.body.velocity.y = sinval*distance;
+	self.SPEED = self.SPEED *((distance/400)*0.25);
 	if(self.SPEED > self.MAX_SPEED)
 		self.SPEED = self.MAX_SPEED;
 	else if(self.SPEED < self.MIN_SPEED)
