@@ -20,7 +20,7 @@ GameState.prototype.preload = function() {
 var obstacles, scrollPosition, background, playerSpeed, randy;//, map, layer0, layer1;
 // Setup the example
 GameState.prototype.create = function() {
-	randy = new RandomDataGenerator();//default RNG
+	//randy = new game.RandomDataGenerator();//default RNG
     // Set stage background color
     //this.game.stage.backgroundColor = 0x4488cc;
 	/*map = game.add.tilemap('map');//, 32, 32);
@@ -92,9 +92,12 @@ Follower.prototype.update = function() {
 	{
 		for(i = count; i < 30; i++)
 		{
-			ypos = randy.integerInRange(64, 544);
+			/*ypos = randy.integerInRange(64, 544);
 			xpos = randy.integerInRange(self.body.x+1050, self.body.x+2050);
-			itemtype = randy.integerInRange(1, 2);
+			itemtype = randy.integerInRange(1, 2);*/
+			ypos = game.rnd.integerInRange(64, 544);
+			xpos = game.rnd.integerInRange(self.body.x+1050, self.body.x+2050);
+			itemtype = game.rnd.integerInRange(1, 2);
 			if(itemtype === 1)
 				obstacles.create(xpos, ypos, 'log');
 			else
