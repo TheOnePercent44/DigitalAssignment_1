@@ -133,7 +133,7 @@ Follower.prototype.update = function() {
 				console.log("Obstacle of type %d at (%d, %d)", itemtype, xpos, ypos);//debug
 			}
 		}
-	catch(TypeError){console.log("There was an error in obstacle gen");}
+	}catch(TypeError){console.log("There was an error in obstacle gen");}
 	background.tilePosition.x = scrollPosition;
 	//console.log("scrollPosition: %d", scrollPosition);//debug
     // If the distance > MIN_DISTANCE then move
