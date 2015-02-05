@@ -79,7 +79,7 @@ var Follower = function(game, x, y, target) {
 Follower.prototype = Object.create(Phaser.Sprite.prototype);
 Follower.prototype.constructor = Follower;
 
-var passedobjects, ypos, xpos, rotation, self, count, itemtype, livingObjects;
+var passedobjects, ypos, xpos, rotation, self, count, itemtype, livingObjects, obstagen;
 Follower.prototype.update = function() {
     // Calculate distance to target
 	console.log("Updating");
@@ -100,14 +100,14 @@ Follower.prototype.update = function() {
 			xpos = game.rnd.integerInRange(self.body.x+1050, self.body.x+2050);
 			itemtype = game.rnd.integerInRange(1, 2);
 			if(itemtype === 1)
-				obstacles.create(xpos, ypos, 'log');
+				obstagen = obstacles.create(xpos, ypos, 'log');
 			else
-				obstacles.create(xpos, ypos, 'bear');
+				obstagen = obstacles.create(xpos, ypos, 'bear');
 			console.log("Obstacle of type %d at (%d, %d)", itemtype, xpos, ypos);//debug
 		}
 	}
 	background.tilePosition.x = scrollPosition;
-	obstacles.setAll('this.body.x', self.MAX_SPEED, false, false, 2, true);
+	obstacles.setAll('this.body.x', self.MAX_SPEED, true, false, 2, true);
     // If the distance > MIN_DISTANCE then move
     //if (distance > this.MIN_DISTANCE) {
     // Calculate the angle to the target
