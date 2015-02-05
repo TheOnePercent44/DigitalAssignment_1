@@ -123,6 +123,7 @@ Follower.prototype.update = function() {
     //} else {
     //    this.body.velocity.setTo(0, 0);
     //}
+	console.log("End of update");//debug
 };
 
 var game = new Phaser.Game(1000, 544, Phaser.AUTO, 'game');
