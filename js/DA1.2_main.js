@@ -57,7 +57,7 @@ var Follower = function(game, x, y, target) {
 	
     this.MAX_SPEED = 650; // pixels/second
 	this.MIN_SPEED = 150;
-	this.SPEED = 300;
+	this.SPEED = 500;
     this.MIN_DISTANCE = 32; // pixels
 };
 
@@ -104,11 +104,11 @@ Follower.prototype.update = function() {
 	
 	sinval = Math.sin(rotation);
 	self.body.velocity.y = sinval*distance;
-	self.SPEED = self.SPEED *(Math.cos(rotation)*distance);
+	/*self.SPEED = self.SPEED *(Math.cos(rotation)*distance);
 	if(self.SPEED > self.MAX_SPEED)
 		self.SPEED = self.MAX_SPEED;
 	else if(self.SPEED < self.MIN_SPEED)
-		self.SPEED = self.MIN_SPEED;
+		self.SPEED = self.MIN_SPEED;*/
 		
 	scrollPosition += self.SPEED;//adjust playerspeed (or this value for speed running)
 	obstacles.setAll('body.velocity.x', -self.SPEED, false, false, 0, true);//updating speed?
