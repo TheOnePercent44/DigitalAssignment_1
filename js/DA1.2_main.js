@@ -90,6 +90,7 @@ Follower.prototype.update = function() {
 	count = obstacles.countLiving();
 	if(count < 30)
 	{
+		console.log("Creating more obstacles...");//debug
 		for(i = count; i < 30; i++)
 		{
 			/*ypos = randy.integerInRange(64, 544);
@@ -102,6 +103,7 @@ Follower.prototype.update = function() {
 				obstacles.create(xpos, ypos, 'log');
 			else
 				obstacles.create(xpos, ypos, 'bear');
+			console.log("Obstacle of type %d at (%d, %d)", itemtype, xpos, ypos);//debug
 		}
 	}
 	background.tilePosition.x = scrollPosition;
