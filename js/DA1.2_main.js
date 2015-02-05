@@ -31,8 +31,9 @@ GameState.prototype.create = function() {
 	layer1.resizeWorld();*/
 	scrollPosition = 0;
 	background = game.add.tileSprite(0, 0, 3200, 544, 'background');
-	obstacles = game.add.group();
-	obstacles.enableBody = true;
+	/*obstacles = game.add.group();
+	game.physics.enable(obstacles, Phaser.Physics.ARCADE);
+	obstacles.enableBody = true;*/
     // Create a follower
     this.game.add.existing(
         new Follower(this.game, 47, this.game.height/2, this.game.input)
@@ -77,20 +78,34 @@ var Follower = function(game, x, y, target) {
 Follower.prototype = Object.create(Phaser.Sprite.prototype);
 Follower.prototype.constructor = Follower;
 
-var passedobjects, ypos, xpos, rotation, self;
+var passedobjects, ypos, xpos, rotation, self, count, itemtype;
 Follower.prototype.update = function() {
     // Calculate distance to target
 	//console.log("Updating");
 	self = this;
     //var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
-	passedobjects = obstacles.filter(function(child, index, children){return child.x < self.x ? true : false;});
+	/*passedobjects = obstacles.filter(function(child, index, children){return child.x < self.x ? true : false;});
 	passedobjects.callAll('destroy', false);
+	count = obstacles.countLiving
+	if(count < 30)
+	{
+		for(int i = count; i < 30; i++)
+		{
+			ypos = game.RandomDataGenerator.integerInRange(64, 544);
+			xpos = game.RandomDataGenerator.integerInRange(self.body.x+1050, self.body.x+2050);
+			itemtype = game.RandomDataGenerator.integerInRange(1, 2);
+			if(itemtype === 1)
+				obstacles.create(xpos, ypos, 'log');
+			else
+				obstacles.create(xpos, ypos, 'bear');
+		}
+	}*/
 	//background.tilePosition.x = scrollPosition;
     // If the distance > MIN_DISTANCE then move
     //if (distance > this.MIN_DISTANCE) {
     // Calculate the angle to the target
 	rotation = self.game.math.angleBetween(self.x, self.y, self.target.x, self.target.y);
-	ypos = game.RandomDataGenerator.integerInRange(64, 544);
+	
 	// Calculate velocity vector based on rotation and this.MAX_SPEED
 	//this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
 	self.body.velocity.y = Math.sin(rotation) * self.MAX_SPEED;
