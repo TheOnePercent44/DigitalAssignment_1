@@ -87,7 +87,7 @@ Follower.prototype.update = function() {
     //var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
 	passedobjects = obstacles.filter(function(child, index, children){return child.x < self.x ? true : false;});
 	passedobjects.callAll('destroy', false);
-	count = obstacles.countLiving;
+	count = obstacles.countLiving();
 	if(count < 30)
 	{
 		for(int i = count; i < 30; i++)
