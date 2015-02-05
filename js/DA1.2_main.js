@@ -92,7 +92,7 @@ Follower.prototype.update = function() {
 	if(count < 30)
 	{
 		console.log("Creating more obstacles...");//debug
-		for(i = count; i < 30; i++)
+		for(i = count; i < 25; i++)
 		{
 			/*ypos = randy.integerInRange(64, 544);
 			xpos = randy.integerInRange(self.body.x+1050, self.body.x+2050);
@@ -101,7 +101,7 @@ Follower.prototype.update = function() {
 			xpos = game.rnd.integerInRange(self.body.x+1050, self.body.x+2050);
 			itemtype = game.rnd.integerInRange(1, 2);
 			obstagen = game.add.sprite('log');
-			if(!(game.physics.arcade.collide(obstagen, obstacles)))
+			if(game.physics.arcade.collide(obstagen, obstacles) === false)
 			{
 				console.log("Creating object");//debug
 				obstagen.destroy();
@@ -137,13 +137,16 @@ Follower.prototype.update = function() {
 	// Calculate velocity vector based on rotation and this.MAX_SPEED
 	//this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
 	sinval = Math.sin(rotation);
-	self.body.velocity.y = sinval*distance*10;
+	self.body.velocity.y = sinval*distance*5;
+	self.SPEED = self.SPEED *(distance/self.MAX_SPEED);
+	if(self.SPEED > self.MAX_SPEED)
+		self.SPEED = self.MAX_SPEED);
 	/*if(sinval < 0)
 		self.body.velocity.y = sinval * self.MAX_SPEED;
 	else
 		self.body.velocity.y = sinval * self.MAX_SPEED;*/
 	//this.body.velocity.x = 300;//constant running speed? debug value for now
-	scrollPosition += self.MAX_SPEED*(distance/self.MAX_SPEED);//adjust playerspeed (or this value for speed running)
+	scrollPosition += self.SPEED;//adjust playerspeed (or this value for speed running)
 	
 	//game.camera.deadzone.setTo(game.camera.deadzone.left+playerSpeed, 0, 950, 544);//maybe keep the camera locked?
     //} else {
