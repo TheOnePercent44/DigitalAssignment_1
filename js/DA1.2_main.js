@@ -71,7 +71,8 @@ var Follower = function(game, x, y, target) {
 	//game.camera.follow(this);
 	//game.camera.deadzone = new Phaser.Rectangle(50, 0, 950, 544);//might lock player position on screen?
     // Define constants that affect motion
-    this.MAX_SPEED = 500; // pixels/second
+    this.MAX_SPEED = 650; // pixels/second
+	this.MIN_SPEED = 150;
 	this.SPEED = 300;
     this.MIN_DISTANCE = 32; // pixels
 };
@@ -86,8 +87,13 @@ Follower.prototype.update = function() {
 	console.log("Updating");
 	self = this;
     //var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
-	passedobjects = obstacles.filter(function(child, index, children){return child.x < (self.x-500) ? true : false;});
-	passedobjects.callAll('destroy', false);
+	/*passedobjects = obstacles.filter(function(child, index, children){return child.x < (self.x-500) ? true : false;});
+	passedobjects.callAll('destroy', false);*/
+	obstacles.forEachAlive(function(obstacle){
+		if(obstacle.x < self.x-500)
+			obstacle.destroy();
+		});
+	//if
 	count = obstacles.countLiving();
 	if(count < 30)
 	{
@@ -101,20 +107,20 @@ Follower.prototype.update = function() {
 			xpos = game.rnd.integerInRange(self.body.x+1050, self.body.x+2050);
 			itemtype = game.rnd.integerInRange(1, 2);
 			obstagen = game.add.sprite('log');
-			if(game.physics.arcade.collide(obstagen, obstacles) === false)
+			if(game.physics.arcade.overlap(obstagen, obstacles) === false)
 			{
 				console.log("Creating object");//debug
 				obstagen.destroy();
 				if(itemtype === 1)
 				{
 					obstagen = obstacles.create(xpos, ypos, 'log');
-					obstagen.body.velocity.x = -self.MAX_SPEED;//edit for variable speed?
+					obstagen.body.velocity.x = -self.SPEED;//edit for variable speed?
 					
 				}
 				else
 				{
 					obstagen = obstacles.create(xpos, ypos, 'bear');
-					obstagen.body.velocity.x = -self.MAX_SPEED;//edit for variable speed?
+					obstagen.body.velocity.x = -self.SPEED;//edit for variable speed?
 				}
 			}
 			else
@@ -127,7 +133,6 @@ Follower.prototype.update = function() {
 	}
 	background.tilePosition.x = scrollPosition;
 	//console.log("scrollPosition: %d", scrollPosition);//debug
-	//obstacles.setAll('this.body.x', self.MAX_SPEED, true, false, 2, true);//updating speed?
     // If the distance > MIN_DISTANCE then move
     //if (distance > this.MIN_DISTANCE) {
     // Calculate the angle to the target
@@ -138,15 +143,18 @@ Follower.prototype.update = function() {
 	//this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
 	sinval = Math.sin(rotation);
 	self.body.velocity.y = sinval*distance*5;
-	self.SPEED = self.SPEED *(distance/self.MAX_SPEED);
+	self.SPEED = self.SPEED *(distance/400);
 	if(self.SPEED > self.MAX_SPEED)
 		self.SPEED = self.MAX_SPEED;
+	else if(self.SPEED < self.MIN_SPEED)
+		self.SPEED = self.MIN_SPEED;
 	/*if(sinval < 0)
 		self.body.velocity.y = sinval * self.MAX_SPEED;
 	else
 		self.body.velocity.y = sinval * self.MAX_SPEED;*/
 	//this.body.velocity.x = 300;//constant running speed? debug value for now
 	scrollPosition += self.SPEED;//adjust playerspeed (or this value for speed running)
+	obstacles.setAll('this.body.velocity.x', -self.SPEED, true, false, 0, true);//updating speed?
 	
 	//game.camera.deadzone.setTo(game.camera.deadzone.left+playerSpeed, 0, 950, 544);//maybe keep the camera locked?
     //} else {
