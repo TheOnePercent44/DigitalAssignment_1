@@ -72,6 +72,7 @@ var Follower = function(game, x, y, target) {
 	//game.camera.deadzone = new Phaser.Rectangle(50, 0, 950, 544);//might lock player position on screen?
     // Define constants that affect motion
     this.MAX_SPEED = 500; // pixels/second
+	this.SPEED = 300;
     this.MIN_DISTANCE = 32; // pixels
 };
 
@@ -85,7 +86,7 @@ function checkOverlap(spriteA, spriteB)
 Follower.prototype = Object.create(Phaser.Sprite.prototype);
 Follower.prototype.constructor = Follower;
 
-var passedobjects, ypos, xpos, rotation, self, count, itemtype, livingObjects, obstagen;
+var passedobjects, ypos, xpos, rotation, self, count, itemtype, distance, obstagen, sinval;
 Follower.prototype.update = function() {
     // Calculate distance to target
 	console.log("Updating");
@@ -132,11 +133,17 @@ Follower.prototype.update = function() {
     // Calculate the angle to the target
 	rotation = self.game.math.angleBetween(self.x, self.y, self.target.x, self.target.y);
 	
+	distance = self.target.x - self.body.x;
 	// Calculate velocity vector based on rotation and this.MAX_SPEED
 	//this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
-	self.body.velocity.y = Math.sin(rotation) * self.MAX_SPEED;
+	sinval = Math.sin(rotation);
+	self.body.velocity.y = sinval*distance*10;
+	/*if(sinval < 0)
+		self.body.velocity.y = sinval * self.MAX_SPEED;
+	else
+		self.body.velocity.y = sinval * self.MAX_SPEED;*/
 	//this.body.velocity.x = 300;//constant running speed? debug value for now
-	scrollPosition += self.MAX_SPEED;//adjust playerspeed (or this value for speed running)
+	scrollPosition += self.MAX_SPEED*(distance/self.MAX_SPEED);//adjust playerspeed (or this value for speed running)
 	
 	//game.camera.deadzone.setTo(game.camera.deadzone.left+playerSpeed, 0, 950, 544);//maybe keep the camera locked?
     //} else {
