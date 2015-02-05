@@ -31,9 +31,9 @@ GameState.prototype.create = function() {
 	layer1.resizeWorld();*/
 	scrollPosition = 0;
 	background = game.add.tileSprite(0, 0, 3200, 544, 'background');
-	/*obstacles = game.add.group();
+	obstacles = game.add.group();
 	game.physics.enable(obstacles, Phaser.Physics.ARCADE);
-	obstacles.enableBody = true;*/
+	obstacles.enableBody = true;
     // Create a follower
     this.game.add.existing(
         new Follower(this.game, 47, this.game.height/2, this.game.input)
