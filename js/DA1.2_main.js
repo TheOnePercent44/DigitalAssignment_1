@@ -71,7 +71,7 @@ var Follower = function(game, x, y, target) {
 	//game.camera.follow(this);
 	//game.camera.deadzone = new Phaser.Rectangle(50, 0, 950, 544);//might lock player position on screen?
     // Define constants that affect motion
-    this.MAX_SPEED = 100; // pixels/second
+    this.MAX_SPEED = 300; // pixels/second
     this.MIN_DISTANCE = 32; // pixels
 };
 
@@ -85,7 +85,7 @@ Follower.prototype.update = function() {
 	console.log("Updating");
 	self = this;
     //var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
-	passedobjects = obstacles.filter(function(child, index, children){return child.x < self.x ? true : false;});
+	passedobjects = obstacles.filter(function(child, index, children){return child.x < (self.x-200) ? true : false;});
 	passedobjects.callAll('destroy', false);
 	count = obstacles.countLiving();
 	if(count < 30)
