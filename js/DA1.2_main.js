@@ -87,7 +87,7 @@ Follower.prototype.update = function() {
 		}
 	}
 	
-	if(isJumping === false)
+	if(isJumping != true)
 		game.physics.arcade.overlap(self, obstacles, collisionHandler, null, this);
 	
 	passedobjects = obstacles.filter(function(child, index, children){return child.x < (self.x-500) ? true : false;});
