@@ -108,11 +108,11 @@ Follower.prototype.update = function() {
 				ypos = game.rnd.integerInRange(0, 480);
 				xpos = game.rnd.integerInRange(self.body.x+1050, self.body.x+2050);
 				itemtype = game.rnd.integerInRange(1, 2);
-				obstagen = game.add.sprite(game, xpos, ypos, 'log');
-				if(game.physics.arcade.overlap(obstagen, obstacles) === false)
-				{
-					console.log("Creating object");//debug
-					obstagen.destroy();
+				//obstagen = game.add.sprite(game, xpos, ypos, 'log');
+				//if(game.physics.arcade.overlap(obstagen, obstacles) === false)
+				//{
+					//console.log("Creating object");//debug
+					//obstagen.destroy();
 					if(itemtype === 1)
 					{
 						obstagen = obstacles.create(xpos, ypos, 'log');
@@ -124,13 +124,13 @@ Follower.prototype.update = function() {
 						obstagen = obstacles.create(xpos, ypos, 'bear');
 						obstagen.body.velocity.x = -self.SPEED;//edit for variable speed?
 					}
-				}
-				else
-				{
-					i--;
-					console.log("overlap detected");//debug
-				}
-				console.log("Obstacle of type %d at (%d, %d)", itemtype, xpos, ypos);//debug
+				//}
+				//else
+				//{
+				//	i--;
+				//	console.log("overlap detected");//debug
+				//}
+				//console.log("Obstacle of type %d at (%d, %d)", itemtype, xpos, ypos);//debug
 			}
 		}
 	}catch(TypeError){console.log("There was an error in obstacle gen");}
