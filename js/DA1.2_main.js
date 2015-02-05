@@ -90,7 +90,7 @@ Follower.prototype.update = function() {
 	count = obstacles.countLiving();
 	if(count < 30)
 	{
-		for(int i = count; i < 30; i++)
+		for(i = count; i < 30; i++)
 		{
 			ypos = randy.integerInRange(64, 544);
 			xpos = randy.integerInRange(self.body.x+1050, self.body.x+2050);
