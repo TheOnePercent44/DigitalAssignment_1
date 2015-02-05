@@ -107,7 +107,7 @@ Follower.prototype.update = function() {
 		}
 	}
 	background.tilePosition.x = scrollPosition;
-	obstacles.setAll('this.x', self.MAX_SPEED, false, false, 2, true);
+	obstacles.setAll('this.body.x', self.MAX_SPEED, false, false, 2, true);
     // If the distance > MIN_DISTANCE then move
     //if (distance > this.MIN_DISTANCE) {
     // Calculate the angle to the target
@@ -123,7 +123,7 @@ Follower.prototype.update = function() {
     //} else {
     //    this.body.velocity.setTo(0, 0);
     //}
-	console.log("End of update");//debug
+	//console.log("End of update");//debug
 };
 
 var game = new Phaser.Game(1000, 544, Phaser.AUTO, 'game');
