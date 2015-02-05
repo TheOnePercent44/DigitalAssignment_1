@@ -65,6 +65,12 @@ var Follower = function(game, x, y, target) {
 Follower.prototype = Object.create(Phaser.Sprite.prototype);
 Follower.prototype.constructor = Follower;
 
+/*function jump(var self)
+{
+	self.frame = 1;
+	return
+}*/
+
 var passedobjects, ypos, xpos, rotation, self, count, itemtype, distance, obstagen, sinval;
 Follower.prototype.update = function() {
     // Calculate distance to target
@@ -103,7 +109,7 @@ Follower.prototype.update = function() {
 	distance = self.target.x - self.body.x;
 	
 	sinval = Math.sin(rotation);
-	self.body.velocity.y = sinval*self.SPEED*distance;
+	self.body.velocity.y = sinval*(self.SPEED+distance);
 	/*self.SPEED = self.SPEED *(Math.cos(rotation)*distance);
 	if(self.SPEED > self.MAX_SPEED)
 		self.SPEED = self.MAX_SPEED;
