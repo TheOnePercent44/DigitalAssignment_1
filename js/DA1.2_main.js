@@ -100,7 +100,7 @@ Follower.prototype.update = function() {
 				obstacles.create(xpos, ypos, 'bear');
 		}
 	}*/
-	//background.tilePosition.x = scrollPosition;
+	background.tilePosition.x = scrollPosition;
     // If the distance > MIN_DISTANCE then move
     //if (distance > this.MIN_DISTANCE) {
     // Calculate the angle to the target
