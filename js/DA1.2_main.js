@@ -76,12 +76,6 @@ var Follower = function(game, x, y, target) {
     this.MIN_DISTANCE = 32; // pixels
 };
 
-function checkOverlap(spriteA, spriteB)
-{
-    var boundsA = spriteA.getBounds();
-    var boundsB = spriteB.getBounds();
-    return Phaser.Rectangle.intersects(boundsA, boundsB);
-}
 // Followers are a type of Phaser.Sprite
 Follower.prototype = Object.create(Phaser.Sprite.prototype);
 Follower.prototype.constructor = Follower;
@@ -107,7 +101,7 @@ Follower.prototype.update = function() {
 			xpos = game.rnd.integerInRange(self.body.x+1050, self.body.x+2050);
 			itemtype = game.rnd.integerInRange(1, 2);
 			obstagen = game.add.sprite('log');
-			if(obstacles.forEach('this.overlap(obstagen)', true, obstacles.RETURN_CHILD) == null)
+			if(obstacles.iterate('body.overlapX', true, obstacles.RETURN_CHILD) == null)
 			{
 				console.log("Creating object");//debug
 				obstagen.destroy();
