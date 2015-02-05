@@ -107,6 +107,7 @@ Follower.prototype.update = function() {
 		}
 	}
 	background.tilePosition.x = scrollPosition;
+	console.log("scrollPosition: %d", scrollPosition);//debug
 	obstacles.setAll('this.body.x', self.MAX_SPEED, true, false, 2, true);
     // If the distance > MIN_DISTANCE then move
     //if (distance > this.MIN_DISTANCE) {
