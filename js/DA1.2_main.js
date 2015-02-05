@@ -67,7 +67,8 @@ Follower.prototype.constructor = Follower;
 
 function jump()
 {
-	self.frame = 1;
+	console.log("Jumping");
+	player.frame = 1;
 	isJumping = true;
 	jumpStart = game.time.now;
 }
