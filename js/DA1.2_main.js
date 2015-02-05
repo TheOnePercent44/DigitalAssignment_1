@@ -80,7 +80,7 @@ Follower.prototype.update = function() {
 	
 	if(isJumping === true)
 	{
-		if((game.time.now-jumpStart) > 80000)
+		if((game.time.now-jumpStart) > 8000)
 		{
 			console.log("Jump is done");//debug
 			isJumping = false;
@@ -89,7 +89,10 @@ Follower.prototype.update = function() {
 	}
 	
 	if(isJumping != true)
+	{
+		console.log("Not jumping, check loss");
 		game.physics.arcade.overlap(self, obstacles, collisionHandler, null, this);
+	}
 	
 	passedobjects = obstacles.filter(function(child, index, children){return child.x < (self.x-500) ? true : false;});
 	passedobjects.callAll('destroy', false);
