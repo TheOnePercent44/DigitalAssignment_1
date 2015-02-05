@@ -13,7 +13,7 @@ GameState.prototype.preload = function() {
 	game.load.image('log', 'assets/log_w_grass_64x64.png');
 	game.load.image('bear', 'assets/beartrap_grass_64x64.png');
 };
-var obstacles, scrollPosition, background, playerSpeed, randy;//, map, layer0, layer1;
+var obstacles, scrollPosition, background, playerSpeed, randy, isJumping, jumpStart, player;//, map, layer0, layer1;
 // Setup the example
 GameState.prototype.create = function() {
 	scrollPosition = 0;
@@ -22,15 +22,15 @@ GameState.prototype.create = function() {
 	game.physics.enable(obstacles, Phaser.Physics.ARCADE);
 	obstacles.enableBody = true;
     // Create a follower
-    this.game.add.existing(
-        new Follower(this.game, 47, this.game.height/2, this.game.input)
-    );
+	player = new Follower(this.game, 47, this.game.height/2, this.game.input)
+    this.game.add.existing(player);
 	
 	//console.log("Player made");
     // Simulate a pointer click/tap input at the center of the stage
     // when the example begins running.
     this.game.input.x = this.game.width/2;
     this.game.input.y = this.game.height/2;
+	game.input.onDown.add(jump, this);
 };
 
 // The update() method is called every frame
@@ -65,15 +65,24 @@ var Follower = function(game, x, y, target) {
 Follower.prototype = Object.create(Phaser.Sprite.prototype);
 Follower.prototype.constructor = Follower;
 
-/*function jump(var self)
+function jump()
 {
 	self.frame = 1;
-	return
-}*/
+	isJumping = true;
+	jumpStart = game.time.now;
+}
 
 var passedobjects, ypos, xpos, rotation, self, count, itemtype, distance, obstagen, sinval;
 Follower.prototype.update = function() {
     // Calculate distance to target
+	if(isJumping === true)
+	{
+		if(game.time.elapsedSince(jumpStart) > 2)
+		{
+			isJumping = false;
+			self.frame = 0;
+		}
+	}
 	console.log("Updating");
 	self = this;
 	
