@@ -100,15 +100,21 @@ Follower.prototype.update = function() {
 			xpos = game.rnd.integerInRange(self.body.x+1050, self.body.x+2050);
 			itemtype = game.rnd.integerInRange(1, 2);
 			if(itemtype === 1)
+			{
 				obstagen = obstacles.create(xpos, ypos, 'log');
+				obstagen.body.velocity.x = -self.MAX_SPEED;//edit for variable speed?
+			}
 			else
+			{
 				obstagen = obstacles.create(xpos, ypos, 'bear');
+				obstagen.body.velocity.x = -self.MAX_SPEED;//edit for variable speed?
+			}
 			console.log("Obstacle of type %d at (%d, %d)", itemtype, xpos, ypos);//debug
 		}
 	}
 	background.tilePosition.x = scrollPosition;
-	console.log("scrollPosition: %d", scrollPosition);//debug
-	obstacles.setAll('this.body.x', self.MAX_SPEED, true, false, 2, true);
+	//console.log("scrollPosition: %d", scrollPosition);//debug
+	//obstacles.setAll('this.body.x', self.MAX_SPEED, true, false, 2, true);//updating speed?
     // If the distance > MIN_DISTANCE then move
     //if (distance > this.MIN_DISTANCE) {
     // Calculate the angle to the target
