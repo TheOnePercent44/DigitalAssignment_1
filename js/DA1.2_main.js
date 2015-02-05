@@ -109,6 +109,7 @@ Follower.prototype.update = function() {
 			obstagen = game.add.sprite('log');
 			if(obstacles.forEach('this.overlap(obstagen)', true, obstacles.RETURN_CHILD) == null)
 			{
+				console.log("Creating object");//debug
 				obstagen.destroy();
 				if(itemtype === 1)
 				{
@@ -123,7 +124,10 @@ Follower.prototype.update = function() {
 				}
 			}
 			else
+			{
 				i--;
+				console.log("overlap detected");//debug
+			}
 			console.log("Obstacle of type %d at (%d, %d)", itemtype, xpos, ypos);//debug
 		}
 	}
