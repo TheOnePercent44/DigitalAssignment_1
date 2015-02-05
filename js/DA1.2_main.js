@@ -84,7 +84,7 @@ Follower.prototype.update = function() {
 	//console.log("Updating");
 	self = this;
     //var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
-	/*passedobjects = obstacles.filter(function(child, index, children){return child.x < self.x ? true : false;});
+	passedobjects = obstacles.filter(function(child, index, children){return child.x < self.x ? true : false;});
 	passedobjects.callAll('destroy', false);
 	count = obstacles.countLiving
 	if(count < 30)
@@ -99,7 +99,7 @@ Follower.prototype.update = function() {
 			else
 				obstacles.create(xpos, ypos, 'bear');
 		}
-	}*/
+	}
 	background.tilePosition.x = scrollPosition;
     // If the distance > MIN_DISTANCE then move
     //if (distance > this.MIN_DISTANCE) {
