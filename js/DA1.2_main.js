@@ -71,7 +71,7 @@ var Follower = function(game, x, y, target) {
 	//game.camera.follow(this);
 	//game.camera.deadzone = new Phaser.Rectangle(50, 0, 950, 544);//might lock player position on screen?
     // Define constants that affect motion
-    this.MAX_SPEED = 250; // pixels/second
+    this.MAX_SPEED = 100; // pixels/second
     this.MIN_DISTANCE = 32; // pixels
 };
 
@@ -79,10 +79,10 @@ var Follower = function(game, x, y, target) {
 Follower.prototype = Object.create(Phaser.Sprite.prototype);
 Follower.prototype.constructor = Follower;
 
-var passedobjects, ypos, xpos, rotation, self, count, itemtype;
+var passedobjects, ypos, xpos, rotation, self, count, itemtype, livingObjects;
 Follower.prototype.update = function() {
     // Calculate distance to target
-	//console.log("Updating");
+	console.log("Updating");
 	self = this;
     //var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
 	passedobjects = obstacles.filter(function(child, index, children){return child.x < self.x ? true : false;});
@@ -107,6 +107,7 @@ Follower.prototype.update = function() {
 		}
 	}
 	background.tilePosition.x = scrollPosition;
+	obstacles.setAll('this.x', self.MAX_SPEED, false, false, 2, true);
     // If the distance > MIN_DISTANCE then move
     //if (distance > this.MIN_DISTANCE) {
     // Calculate the angle to the target
