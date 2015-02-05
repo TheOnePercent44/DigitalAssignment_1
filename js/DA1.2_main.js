@@ -89,7 +89,7 @@ Follower.prototype.update = function() {
     //var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
 	/*passedobjects = obstacles.filter(function(child, index, children){return child.x < (self.x-500) ? true : false;});
 	passedobjects.callAll('destroy', false);*/
-	obstacles.forEachAlive(function(obstacle){
+	obstacles.forEach(function(obstacle){
 		if(obstacle.x < self.x-500)
 			obstacle.destroy();
 		});
