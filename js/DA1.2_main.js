@@ -75,6 +75,12 @@ var Follower = function(game, x, y, target) {
     this.MIN_DISTANCE = 32; // pixels
 };
 
+function checkOverlap(spriteA, spriteB)
+{
+    var boundsA = spriteA.getBounds();
+    var boundsB = spriteB.getBounds();
+    return Phaser.Rectangle.intersects(boundsA, boundsB);
+}
 // Followers are a type of Phaser.Sprite
 Follower.prototype = Object.create(Phaser.Sprite.prototype);
 Follower.prototype.constructor = Follower;
@@ -96,18 +102,24 @@ Follower.prototype.update = function() {
 			/*ypos = randy.integerInRange(64, 544);
 			xpos = randy.integerInRange(self.body.x+1050, self.body.x+2050);
 			itemtype = randy.integerInRange(1, 2);*/
-			ypos = game.rnd.integerInRange(64, 544);
+			ypos = game.rnd.integerInRange(0, 480);
 			xpos = game.rnd.integerInRange(self.body.x+1050, self.body.x+2050);
 			itemtype = game.rnd.integerInRange(1, 2);
-			if(itemtype === 1)
+			obstagen = game.add.sprite('log');
+			if(obstacles.forEach('this.overlap(obstagen)', true, RETURN_CHILD) != null)
 			{
-				obstagen = obstacles.create(xpos, ypos, 'log');
-				obstagen.body.velocity.x = -self.MAX_SPEED;//edit for variable speed?
-			}
-			else
-			{
-				obstagen = obstacles.create(xpos, ypos, 'bear');
-				obstagen.body.velocity.x = -self.MAX_SPEED;//edit for variable speed?
+				obstagen.destroy();
+				if(itemtype === 1)
+				{
+					obstagen = obstacles.create(xpos, ypos, 'log');
+					obstagen.body.velocity.x = -self.MAX_SPEED;//edit for variable speed?
+					
+				}
+				else
+				{
+					obstagen = obstacles.create(xpos, ypos, 'bear');
+					obstagen.body.velocity.x = -self.MAX_SPEED;//edit for variable speed?
+				}
 			}
 			console.log("Obstacle of type %d at (%d, %d)", itemtype, xpos, ypos);//debug
 		}
