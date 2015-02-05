@@ -80,7 +80,7 @@ Follower.prototype.update = function() {
 	
 	if(isJumping === true)
 	{
-		if(game.time.elapsedSince(jumpStart) > 3000)
+		if((game.time.now-jumpStart) > 3000)
 		{
 			console.log("Jump is done");//debug
 			isJumping = false;
