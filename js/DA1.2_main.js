@@ -154,7 +154,7 @@ Follower.prototype.update = function() {
 		self.body.velocity.y = sinval * self.MAX_SPEED;*/
 	//this.body.velocity.x = 300;//constant running speed? debug value for now
 	scrollPosition += self.SPEED;//adjust playerspeed (or this value for speed running)
-	obstacles.setAll('this.body.velocity.x', -self.SPEED, true, false, 0, true);//updating speed?
+	//obstacles.setAll('this.body.velocity.x', -self.SPEED, true, false, 0, true);//updating speed?
 	
 	//game.camera.deadzone.setTo(game.camera.deadzone.left+playerSpeed, 0, 950, 544);//maybe keep the camera locked?
     //} else {
