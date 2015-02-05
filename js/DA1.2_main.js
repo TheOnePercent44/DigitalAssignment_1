@@ -9,10 +9,6 @@ var GameState = function(game) {
 // Load images and sounds
 GameState.prototype.preload = function() {
     game.load.spritesheet('dog', 'assets/dog.png', 47, 31, 4);
-	/*game.load.tilemap('map', 'assets/grasstile4.json', null, Phaser.Tilemap.TILED_JSON);
-	game.load.image('grasstiles', 'assets/grassblock2_128x96_poor.png');
-	game.load.image('logtiles', 'assets/log_w_grass_64x64.png');
-	game.load.image('beartiles', 'assets/beartrap_grass_64x64.png');*/
 	game.load.image('background', 'assets/grasstile5.png');
 	game.load.image('log', 'assets/log_w_grass_64x64.png');
 	game.load.image('bear', 'assets/beartrap_grass_64x64.png');
@@ -20,16 +16,6 @@ GameState.prototype.preload = function() {
 var obstacles, scrollPosition, background, playerSpeed, randy;//, map, layer0, layer1;
 // Setup the example
 GameState.prototype.create = function() {
-	//randy = new game.RandomDataGenerator();//default RNG
-    // Set stage background color
-    //this.game.stage.backgroundColor = 0x4488cc;
-	/*map = game.add.tilemap('map');//, 32, 32);
-	map.addTilesetImage('GrassBlocks', 'grasstiles', 32, 32);
-	map.addTilesetImage('LogBlock', 'logtiles', 64, 64);
-	map.addTilesetImage('BearBlock', 'beartiles', 64, 64);
-	layer0 = map.createLayer('Layer0');
-	layer1 = map.createLayer('Layer1');
-	layer1.resizeWorld();*/
 	scrollPosition = 0;
 	background = game.add.tileSprite(0, 0, 3200, 544, 'background');
 	obstacles = game.add.group();
@@ -68,9 +54,7 @@ var Follower = function(game, x, y, target) {
     this.game.physics.enable(this, Phaser.Physics.ARCADE);
 	
     this.body.collideWorldBounds = true;
-	//game.camera.follow(this);
-	//game.camera.deadzone = new Phaser.Rectangle(50, 0, 950, 544);//might lock player position on screen?
-    // Define constants that affect motion
+	
     this.MAX_SPEED = 650; // pixels/second
 	this.MIN_SPEED = 150;
 	this.SPEED = 300;
@@ -86,18 +70,14 @@ Follower.prototype.update = function() {
     // Calculate distance to target
 	console.log("Updating");
 	self = this;
-    //var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
+	
 	passedobjects = obstacles.filter(function(child, index, children){return child.x < (self.x-500) ? true : false;});
 	passedobjects.callAll('destroy', false);
-	/*obstacles.forEach(function(obstacle){
-		if(obstacle.x < self.x-500)
-			obstacle.destroy();
-		});*/
-	//if
+	
 	count = obstacles.countLiving();
 	if(count < 30)
 	{
-		console.log("Creating more obstacles...");//debug
+		//console.log("Creating more obstacles...");//debug
 		for(i = count; i < 25; i++)
 		{
 			ypos = game.rnd.integerInRange(0, 480);
@@ -117,15 +97,11 @@ Follower.prototype.update = function() {
 		}
 	}
 	background.tilePosition.x = scrollPosition;
-	//console.log("scrollPosition: %d", scrollPosition);//debug
-    // If the distance > MIN_DISTANCE then move
-    //if (distance > this.MIN_DISTANCE) {
-    // Calculate the angle to the target
+	
 	rotation = self.game.math.angleBetween(self.x, self.y, self.target.x, self.target.y);
 	
 	distance = self.target.x - self.body.x;
-	// Calculate velocity vector based on rotation and this.MAX_SPEED
-	//this.body.velocity.x = Math.cos(rotation) * this.MAX_SPEED;
+	
 	sinval = Math.sin(rotation);
 	self.body.velocity.y = sinval*distance*5;
 	self.SPEED = self.SPEED *(distance/400);
@@ -133,19 +109,9 @@ Follower.prototype.update = function() {
 		self.SPEED = self.MAX_SPEED;
 	else if(self.SPEED < self.MIN_SPEED)
 		self.SPEED = self.MIN_SPEED;
-	/*if(sinval < 0)
-		self.body.velocity.y = sinval * self.MAX_SPEED;
-	else
-		self.body.velocity.y = sinval * self.MAX_SPEED;*/
-	//this.body.velocity.x = 300;//constant running speed? debug value for now
+		
 	scrollPosition += self.SPEED;//adjust playerspeed (or this value for speed running)
-	//obstacles.setAll('this.body.velocity.x', -self.SPEED, true, false, 0, true);//updating speed?
-	
-	//game.camera.deadzone.setTo(game.camera.deadzone.left+playerSpeed, 0, 950, 544);//maybe keep the camera locked?
-    //} else {
-    //    this.body.velocity.setTo(0, 0);
-    //}
-	//console.log("End of update");//debug
+	obstacles.setAll('body.velocity.x', -self.SPEED, false, false, 0, true);//updating speed?
 };
 
 var game = new Phaser.Game(1000, 544, Phaser.AUTO, 'game');
