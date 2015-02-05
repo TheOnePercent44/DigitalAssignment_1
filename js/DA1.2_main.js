@@ -80,8 +80,9 @@ Follower.prototype.update = function() {
 	
 	if(isJumping === true)
 	{
-		if(game.time.elapsedSince(jumpStart) > 2)
+		if(game.time.elapsedSince(jumpStart) > 3000)
 		{
+			console.log("Jump is done");//debug
 			isJumping = false;
 			self.frame = 0;
 		}
@@ -141,6 +142,7 @@ function collisionHandler(self, obstacle)
 function endGame()
 {
 	console.log("The game is over. You lose.");
+	player.SPEED = 0;
 }
 
 var game = new Phaser.Game(1000, 544, Phaser.AUTO, 'game');
