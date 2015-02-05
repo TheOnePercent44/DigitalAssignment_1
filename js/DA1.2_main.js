@@ -85,7 +85,7 @@ Follower.prototype.update = function() {
     //var distance = this.game.math.distance(this.x, this.y, this.target.x, this.target.y);
 	passedobjects = obstacles.filter(function(child, index, children){return child.x < self.x ? true : false;});
 	passedobjects.callAll('destroy', false);
-	background.tilePosition.x = scrollPosition;
+	//background.tilePosition.x = scrollPosition;
     // If the distance > MIN_DISTANCE then move
     //if (distance > this.MIN_DISTANCE) {
     // Calculate the angle to the target
