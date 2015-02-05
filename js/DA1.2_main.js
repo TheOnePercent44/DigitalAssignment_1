@@ -101,7 +101,7 @@ Follower.prototype.update = function() {
 			xpos = game.rnd.integerInRange(self.body.x+1050, self.body.x+2050);
 			itemtype = game.rnd.integerInRange(1, 2);
 			obstagen = game.add.sprite('log');
-			if(obstacles.iterate('body.overlapX', true, obstacles.RETURN_CHILD) == null)
+			if(!(game.physics.arcade.collide(obstagen, obstacles)))
 			{
 				console.log("Creating object");//debug
 				obstagen.destroy();
