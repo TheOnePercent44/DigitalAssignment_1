@@ -107,7 +107,7 @@ Follower.prototype.update = function() {
 			xpos = game.rnd.integerInRange(self.body.x+1050, self.body.x+2050);
 			itemtype = game.rnd.integerInRange(1, 2);
 			obstagen = game.add.sprite('log');
-			if(obstacles.forEach('this.overlap(obstagen)', true, obstacles.RETURN_CHILD) != null)
+			if(obstacles.forEach('this.overlap(obstagen)', true, obstacles.RETURN_CHILD) == null)
 			{
 				obstagen.destroy();
 				if(itemtype === 1)
@@ -122,6 +122,8 @@ Follower.prototype.update = function() {
 					obstagen.body.velocity.x = -self.MAX_SPEED;//edit for variable speed?
 				}
 			}
+			else
+				i--;
 			console.log("Obstacle of type %d at (%d, %d)", itemtype, xpos, ypos);//debug
 		}
 	}
